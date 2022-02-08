@@ -10,7 +10,6 @@ import { AppBar, Box, CssBaseline, Toolbar, useMediaQuery } from '@mui/material'
 import Breadcrumbs from 'components/ui-component/extended/Breadcrumbs';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Customization from '../Customization';
 import navigation from 'menu-items';
 import { drawerWidth } from 'store/constant';
 import { SET_MENU } from 'store/actions';
@@ -91,6 +90,7 @@ const MainLayout = () => {
                 elevation={0}
                 sx={{
                     bgcolor: theme.palette.background.default,
+                    borderBottom: '0.5px solid rgba(255, 255, 255, 0.25)',
                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
                 }}
             >
@@ -108,7 +108,6 @@ const MainLayout = () => {
                 <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
                 <Outlet />
             </Main>
-            <Customization />
         </Box>
     );
 };
