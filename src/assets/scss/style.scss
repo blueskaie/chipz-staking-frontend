@@ -4,6 +4,12 @@
 // third-party
 @import '~react-perfect-scrollbar/dist/css/styles.css';
 
+iframe{
+    display: none;
+    width: 0;
+    height: 0;
+}
+
 // ==============================|| LIGHT BOX ||============================== //
 .fullscreen .react-images__blanket {
     z-index: 1200;

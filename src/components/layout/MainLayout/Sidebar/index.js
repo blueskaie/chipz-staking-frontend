@@ -22,7 +22,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
     const drawer = (
         <>
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-                <Box sx={{ display: 'flex', p: 2, mx: 'auto' }}>
+                <Box sx={{ display: 'flex', mx: 'auto' }}>
                     <LogoSection />
                 </Box>
             </Box>
@@ -30,9 +30,10 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                 <PerfectScrollbar
                     component="div"
                     style={{
-                        height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 88px)',
+                        height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 80px)',
                         paddingLeft: '16px',
-                        paddingRight: '16px'
+                        paddingRight: '16px',
+                        borderRight: '1px solid rgba(255, 255, 255, 0.25)'
                     }}
                 >
                     <MenuList />
@@ -61,9 +62,8 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                         width: drawerWidth,
                         background: theme.palette.background.default,
                         color: theme.palette.text.primary,
-                        borderRight: 'none',
                         [theme.breakpoints.up('md')]: {
-                            top: '88px'
+                            top: '80px'
                         }
                     }
                 }}

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Box, ButtonBase } from '@mui/material';
+import { Avatar, Box, ButtonBase, Button } from '@mui/material';
 
 // project imports
 import LogoSection from '../LogoSection';
@@ -30,7 +30,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
                 <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
                     <LogoSection />
                 </Box>
-                <ButtonBase sx={{ borderRadius: '12px', overflow: 'hidden' }}>
+                {/* <ButtonBase sx={{ borderRadius: '12px', overflow: 'hidden' }}>
                     <Avatar
                         variant="rounded"
                         sx={{
@@ -49,13 +49,26 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     >
                         <IconMenu2 stroke={1.5} size="1.3rem" />
                     </Avatar>
-                </ButtonBase>
+                </ButtonBase> */}
             </Box>
 
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ flexGrow: 1 }} />
 
-            <ButtonBase>Connect</ButtonBase>
+            <Button
+                sx={{
+                    color: 'white',
+                    fontSize: '15px',
+                    fontWeight: 600,
+                    padding: '3px 40px',
+                    backgroundColor: '#CE2179',
+                    '&:hover': { backgroundColor: '#BE1169' },
+                    boxShadow: '0px 8px 0px #8F1754',
+                    borderRadius: '7px'
+                }}
+            >
+                Connect
+            </Button>
         </>
     );
 };

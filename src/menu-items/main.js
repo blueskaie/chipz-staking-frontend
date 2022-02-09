@@ -19,7 +19,7 @@ const main = {
             id: 'home',
             title: 'Home',
             type: 'item',
-            url: '/utils/util-typography',
+            url: '/',
             icon: icons.IconTypography,
             breadcrumbs: false
         },
@@ -27,7 +27,7 @@ const main = {
             id: 'farms',
             title: 'Farms',
             type: 'item',
-            url: '/utils/util-color',
+            url: '/farms',
             icon: icons.IconPalette,
             breadcrumbs: false
         },
@@ -38,15 +38,36 @@ const main = {
             icon: icons.IconWindmill,
             children: [
                 {
-                    id: 'tabler-icons',
-                    title: 'Tabler Icons',
+                    id: 'pancake-swap',
+                    title: 'Pancake Swap',
                     type: 'item',
                     url: '/icons/tabler-icons',
                     breadcrumbs: false
                 },
                 {
-                    id: 'material-icons',
-                    title: 'Material Icons',
+                    id: 'dextools',
+                    title: 'DexTools',
+                    type: 'item',
+                    url: '/icons/material-icons',
+                    breadcrumbs: false
+                },
+                {
+                    id: 'coinmarketcap',
+                    title: 'CoinMarketCap',
+                    type: 'item',
+                    url: '/icons/material-icons',
+                    breadcrumbs: false
+                },
+                {
+                    id: 'dexguru',
+                    title: 'DexGuru',
+                    type: 'item',
+                    url: '/icons/material-icons',
+                    breadcrumbs: false
+                },
+                {
+                    id: 'bogged',
+                    title: 'Bogged',
                     type: 'item',
                     url: '/icons/material-icons',
                     breadcrumbs: false

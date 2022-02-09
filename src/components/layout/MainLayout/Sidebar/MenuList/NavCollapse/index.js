@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Collapse, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { Collapse, List, ListItemButton, ListItemIcon, ListItemText, Typography, Box } from '@mui/material';
 
 // project imports
 import NavItem from '../NavItem';
@@ -58,41 +58,35 @@ const NavCollapse = ({ menu, level }) => {
 
     return (
         <>
-            <ListItemButton
+            <Box
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="space-between"
                 sx={{
-                    borderRadius: `${customization.borderRadius}px`,
                     mb: 0.5,
                     alignItems: 'flex-start',
-                    backgroundColor: level > 1 ? 'transparent !important' : 'inherit',
+                    backgroundColor: selected === menu.id ? 'rgba(206, 33, 121, 0.1)' : 'transparent !important',
                     py: level > 1 ? 1 : 1.25,
                     pl: `${level * 24}px`
                 }}
                 selected={selected === menu.id}
                 onClick={handleClick}
             >
-                <ListItemIcon sx={{ my: 'auto', minWidth: !menu.icon ? 18 : 36 }}>{menuIcon}</ListItemIcon>
-                <ListItemText
-                    primary={
-                        <Typography variant={selected === menu.id ? 'h5' : 'body1'} color="inherit" sx={{ my: 'auto' }}>
-                            {menu.title}
-                        </Typography>
-                    }
-                    secondary={
-                        menu.caption && (
-                            <Typography variant="caption" sx={{ ...theme.typography.subMenuCaption }} display="block" gutterBottom>
-                                {menu.caption}
-                            </Typography>
-                        )
-                    }
-                />
+                <Box display="flex" flexDirection="row" alignItems="center" justifyContent="flex-start">
+                    <Box sx={{ my: 'auto', minWidth: !menu.icon ? 18 : 36 }}>{menuIcon}</Box>
+                    <Typography variant="h4" color={selected === menu.id ? 'white' : '#555555'} sx={{ my: 'auto' }}>
+                        {menu.title}
+                    </Typography>
+                </Box>
                 {open ? (
-                    <IconChevronUp stroke={1.5} size="1rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+                    <IconChevronUp stroke={3} size="1.5rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
                 ) : (
-                    <IconChevronDown stroke={1.5} size="1rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+                    <IconChevronDown stroke={3} size="1.5rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
                 )}
-            </ListItemButton>
+            </Box>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                <List
+                <Box
                     component="div"
                     disablePadding
                     sx={{
@@ -104,13 +98,12 @@ const NavCollapse = ({ menu, level }) => {
                             top: 0,
                             height: '100%',
                             width: '1px',
-                            opacity: 1,
-                            background: theme.palette.primary.light
+                            opacity: 1
                         }
                     }}
                 >
                     {menus}
-                </List>
+                </Box>
             </Collapse>
         </>
     );

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery } from '@mui/material';
+import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery, Box, Button } from '@mui/material';
 
 // project imports
 import { MENU_OPEN, SET_MENU } from 'store/actions';
@@ -65,45 +65,31 @@ const NavItem = ({ item, level }) => {
     }, []);
 
     return (
-        <ListItemButton
+        <Button
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
             {...listItemProps}
             disabled={item.disabled}
             sx={{
-                borderRadius: `${customization.borderRadius}px`,
                 mb: 0.5,
                 alignItems: 'flex-start',
-                backgroundColor: level > 1 ? 'transparent !important' : 'inherit',
+                backgroundColor:
+                    customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'rgba(206, 33, 121, 0.1)' : 'transparent !important',
+                color: customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'white' : '#555555',
                 py: level > 1 ? 1 : 1.25,
                 pl: `${level * 24}px`
             }}
             selected={customization.isOpen.findIndex((id) => id === item.id) > -1}
             onClick={() => itemHandler(item.id)}
         >
-            <ListItemIcon sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36 }}>{itemIcon}</ListItemIcon>
-            <ListItemText
-                primary={
-                    <Typography variant={customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'h5' : 'body1'} color="inherit">
-                        {item.title}
-                    </Typography>
-                }
-                secondary={
-                    item.caption && (
-                        <Typography variant="caption" sx={{ ...theme.typography.subMenuCaption }} display="block" gutterBottom>
-                            {item.caption}
-                        </Typography>
-                    )
-                }
-            />
-            {item.chip && (
-                <Chip
-                    color={item.chip.color}
-                    variant={item.chip.variant}
-                    size={item.chip.size}
-                    label={item.chip.label}
-                    avatar={item.chip.avatar && <Avatar>{item.chip.avatar}</Avatar>}
-                />
-            )}
-        </ListItemButton>
+            <Box display="flex" flexDirection="row" justifyContent="flex-start" width="100%">
+                <Box sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36 }}>{itemIcon}</Box>
+                <Typography variant="h4" color={customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'white' : '#555555'}>
+                    {item.title}
+                </Typography>
+            </Box>
+        </Button>
     );
 };
 

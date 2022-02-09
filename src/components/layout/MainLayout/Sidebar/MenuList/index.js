@@ -1,5 +1,5 @@
 // material-ui
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 // project imports
 import NavGroup from './NavGroup';
@@ -21,7 +21,7 @@ const MenuList = () => {
         }
     });
 
-    return <>{navItems}</>;
+    return <Box height="calc(100vh - 100px)">{navItems}</Box>;
 };
 
 export default MenuList;
