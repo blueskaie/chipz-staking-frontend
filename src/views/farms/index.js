@@ -1,57 +1,115 @@
 // material-ui
 import { Typography, Box, Switch, Button } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 import farming from '../../assets/images/farm-ethereum.png';
+import logoback from '../../assets/images/logo_back.png';
 
 // ==============================|| SAMPLE PAGE ||============================== //
-const IOSSwitch = styled((props) => <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />)(({ theme }) => ({
-    width: 55,
-    height: 30,
+const IOSSwitch = styled(Switch)(() => ({
+    width: 80,
+    height: 40,
     padding: 0,
-    border: '1px solid #8D91A0',
-    borderRadius: 15,
     '& .MuiSwitch-switchBase': {
-        padding: 1,
-        margin: 2,
-        transitionDuration: '300ms',
+        margin: 0,
+        padding: 2,
+        transform: 'translateX(0px)',
         '&.Mui-checked': {
-            transform: 'translateX(25px)',
-            color: '#fff',
-            '& + .MuiSwitch-track': {
-                backgroundColor: '#1A2033',
-                opacity: 1,
-                border: 0
+            '& .MuiSwitch-thumb': {
+                backgroundColor: '#CE2179',
+                color: '#1A2033',
+                border: '1px solid #CE2179'
             },
-            '&.Mui-disabled + .MuiSwitch-track': {
-                opacity: 0.5
+            color: '#CE2179',
+            transform: 'translateX(36px)',
+            '& .MuiSwitch-thumb:before': {
+                content: "'|||'",
+                textAlign: 'center'
+            },
+            '& + .MuiSwitch-track': {
+                opacity: 1,
+                backgroundColor: '#1A2033',
+                border: '1px solid #CE2179'
             }
-        },
-        '&.Mui-focusVisible .MuiSwitch-thumb': {
-            color: '#33cf4d',
-            border: '6px solid #fff',
-            backgroundColor: theme.palette.mode === 'dark' ? '#FFFFFF' : '#CE2179'
-        },
-        '&.Mui-disabled .MuiSwitch-thumb': {
-            color: theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[600]
-        },
-        '&.Mui-disabled + .MuiSwitch-track': {
-            opacity: theme.palette.mode === 'light' ? 0.7 : 0.3
         }
     },
     '& .MuiSwitch-thumb': {
-        boxSizing: 'border-box',
-        backgroundColor: theme.palette.mode === 'dark' ? '#FFFFFF' : '#CE2179',
-        width: 23,
-        height: 23
+        backgroundColor: '#8D91A0',
+        color: '#1A2033',
+        border: '1px solid #8D91A0',
+        borderRadius: 20,
+        width: 40,
+        height: 36,
+        '&:before': {
+            content: "'|||'",
+            textAlign: 'center',
+            position: 'absolute',
+            fontSize: '18px',
+            borderRadius: 20,
+            width: '100%',
+            height: '100%',
+            left: 0,
+            top: 10
+        }
     },
     '& .MuiSwitch-track': {
-        borderRadius: 20,
-        backgroundColor: '#1A2033',
         opacity: 1,
-        transition: theme.transitions.create(['background-color'], {
-            duration: 500
-        })
+        backgroundColor: '#1A2033',
+        borderRadius: 20,
+        border: '1px solid #CE2179'
+    }
+}));
+
+const ActiveSwitch = styled(Switch)(() => ({
+    width: 250,
+    height: 40,
+    padding: 0,
+    '& .MuiSwitch-switchBase': {
+        margin: 0,
+        padding: 0,
+        transform: 'translateX(0px)',
+        '&.Mui-checked': {
+            '& .MuiSwitch-thumb': {
+                backgroundColor: '#CE2179',
+                color: '#FFFFFF',
+                border: '1px solid #CE2179'
+            },
+            color: '#FFFFFF',
+            transform: 'translateX(110px)',
+            '& .MuiSwitch-thumb:before': {
+                content: "'Inactive'",
+                textAlign: 'center'
+            },
+            '& + .MuiSwitch-track': {
+                opacity: 1,
+                backgroundColor: '#1A2033',
+                border: '1px solid #CE2179'
+            }
+        }
+    },
+    '& .MuiSwitch-thumb': {
+        backgroundColor: '#CE2179',
+        border: '1px solid #CE2179',
+        borderRadius: 20,
+        width: 140,
+        height: 40,
+        '&:before': {
+            content: "'Active'",
+            textAlign: 'center',
+            position: 'absolute',
+            fontSize: '18px',
+            borderRadius: 20,
+            width: '100%',
+            height: '100%',
+            left: 0,
+            top: 10
+        }
+    },
+    '& .MuiSwitch-track': {
+        opacity: 1,
+        backgroundColor: '#1A2033',
+        borderRadius: 20,
+        border: '1px solid #CE2179'
     }
 }));
 
@@ -67,30 +125,13 @@ const Farms = () => (
                 </Typography>
             </Box>
             <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" pt="20px">
-                <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between">
+                <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" mr="40px">
                     <IOSSwitch />
                     <Typography pl="10px" color="#8D91A0">
                         Staked Only
                     </Typography>
                 </Box>
-                <Box
-                    display="flex"
-                    flexDirection="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    borderRadius="30px"
-                    bgcolor="#1A2033"
-                    border="1px solid #CE2179"
-                    ml="50px"
-                    sx={{ cursor: 'pointer' }}
-                >
-                    <Box borderRadius="30px" border="1px solid #CE2179" py="5px" px="30px" bgcolor="#CE2179" color="white">
-                        Active
-                    </Box>
-                    <Box borderRadius="30px" border="1px solid #CE2179" py="5px" px="30px" color="#CE2179">
-                        Inactive
-                    </Box>
-                </Box>
+                <ActiveSwitch />
             </Box>
             <Box
                 display="flex"
@@ -136,7 +177,15 @@ const Farms = () => (
                         <Typography fontSize="16px">0</Typography>
                     </Box>
                 </Box>
-                <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" width="100%" gap="20px">
+                <Box
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    width="100%"
+                    gap="20px"
+                    mb="20px"
+                >
                     <Button
                         sx={{
                             color: 'white',
@@ -169,6 +218,9 @@ const Farms = () => (
                     </Button>
                 </Box>
             </Box>
+        </Box>
+        <Box zIndex="-1" position="absolute" left="calc(100% - 400px)" top="calc(100vh - 400px)">
+            <img src={logoback} alt="logo back" style={{ width: '400px' }} />
         </Box>
     </Box>
 );

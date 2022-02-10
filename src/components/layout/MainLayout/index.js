@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
-import { AppBar, Box, CssBaseline, Toolbar, useMediaQuery } from '@mui/material';
+import { AppBar, Box, CssBaseline, Toolbar, Typography, useMediaQuery, Button } from '@mui/material';
 
 // project imports
 import Breadcrumbs from 'components/ui-component/extended/Breadcrumbs';
@@ -16,6 +16,8 @@ import { SET_MENU } from 'store/actions';
 
 // assets
 import { IconChevronRight } from '@tabler/icons';
+
+import metamask from '../../../assets/images/metamask.png';
 
 // styles
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
@@ -73,6 +75,11 @@ const MainLayout = () => {
     const handleLeftDrawerToggle = () => {
         dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
     };
+    const [showMetamask, setShowMetamask] = useState(false);
+
+    const clickMetamask = () => {
+        setShowMetamask(!showMetamask);
+    };
 
     useEffect(() => {
         dispatch({ type: SET_MENU, opened: !matchDownMd });
@@ -95,7 +102,7 @@ const MainLayout = () => {
                 }}
             >
                 <Toolbar>
-                    <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
+                    <Header handleLeftDrawerToggle={handleLeftDrawerToggle} clickMetamask={clickMetamask} />
                 </Toolbar>
             </AppBar>
 
@@ -106,6 +113,74 @@ const MainLayout = () => {
             <Main theme={theme} open={leftDrawerOpened}>
                 {/* breadcrumb */}
                 <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
+                {showMetamask && (
+                    <Box
+                        position="absolute"
+                        zIndex="10"
+                        width="100%"
+                        height="calc(100vh + 250px)"
+                        left="0px"
+                        top="0px"
+                        bgcolor="rgba(17, 21, 34, 0.49)"
+                        style={{ backdropFilter: 'blur(28px)' }}
+                    >
+                        <Box
+                            display="flex"
+                            position="relative"
+                            flexDirection="column"
+                            p="10px"
+                            borderRadius="12px"
+                            border="2px solid #CE2179"
+                            alignItems="center"
+                            boxShadow="0px 2px 5px rgba(0, 0, 0, 0.1)"
+                            bgcolor="#111522"
+                            width="500px"
+                            top="calc(100vh - 1000px / 2)"
+                            left="calc((100vw - 500px) / 2)"
+                        >
+                            <Box
+                                display="flex"
+                                flexDirection="row"
+                                alignItems="center"
+                                justifyContent="space-between"
+                                borderBottom="1px solid rgba(255, 255, 255, 0.25)"
+                                sx={{
+                                    color: 'white',
+                                    fontSize: '30px',
+                                    fontWeight: 600,
+                                    width: '100%'
+                                }}
+                            >
+                                <Typography fontSize="16px" fontWeight="400">
+                                    Connect to a Wallet
+                                </Typography>
+                                <Button onClick={() => setShowMetamask(false)}>
+                                    <Typography fontSize="16px" fontWeight="400" color="white">
+                                        X
+                                    </Typography>
+                                </Button>
+                            </Box>
+                            <Button
+                                sx={{
+                                    color: 'white',
+                                    padding: '10px 40px',
+                                    backgroundColor: '#CE2179',
+                                    '&:hover': { backgroundColor: '#BE1169' },
+                                    boxShadow: '0px 8px 0px #8F1754',
+                                    borderRadius: '7px',
+                                    width: '250px',
+                                    marginY: '30px'
+                                }}
+                                onClick={clickMetamask}
+                            >
+                                <Typography fontSize="18px" fontWeight="600" mr="20px">
+                                    Metamask
+                                </Typography>
+                                <img src={metamask} alt="metamask" style={{ width: '32px' }} />
+                            </Button>
+                        </Box>
+                    </Box>
+                )}
                 <Outlet />
             </Main>
         </Box>

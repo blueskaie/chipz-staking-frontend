@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // material-ui
-import { Grid, Box, Typography, Button } from '@mui/material';
+import { Grid, Typography, Button, Box } from '@mui/material';
 
 // project imports
 // import EarningCard from './EarningCard';
@@ -14,6 +14,8 @@ import { Grid, Box, Typography, Button } from '@mui/material';
 import { gridSpacing } from 'store/constant';
 
 import Announcement from '../../../assets/images/announcement.png';
+
+import logoback from '../../../assets/images/logo_back.png';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
@@ -30,48 +32,54 @@ const Dashboard = () => {
                     <Typography sx={{ color: 'white', fontSize: '30px', fontWeight: 600 }}>CHIPZ STAKING PLATFORM</Typography>
                     <Typography sx={{ fontSize: '16px', fontWeight: 500 }}>Revolutionizing Reward Points</Typography>
                 </Grid>
-                <Grid item paddingY={8} paddingX={5} display="flex" flexWrap="wrap" rowGap="40px" justifyContent="space-around">
-                    <Grid item flex={1} lg={5} md={5} sm={10} xs={10}>
-                        <Grid item borderRadius="16px" bgcolor="#1A2033" boxShadow="0px 40px 60px -50px #000000" padding="30px">
+                <Grid item paddingY={8} paddingX={1} display="flex" flexWrap="wrap" rowGap="40px" justifyContent="space-around">
+                    <Grid item flex={1} lg={5} md={5} sm={12}>
+                        <Grid
+                            item
+                            borderRadius="16px"
+                            bgcolor="#1A2033"
+                            boxShadow="0px 40px 60px -50px #000000"
+                            padding="30px"
+                            height="100%"
+                        >
                             <Typography sx={{ color: '#CE2179', fontSize: '23px', fontWeight: 600 }}>Farms & Staking</Typography>
-                            <Grid item padding="15px">
-                                <Grid
-                                    item
-                                    display="flex"
-                                    flexDirection="row"
-                                    alignItems="center"
-                                    justifyContent="space-between"
-                                    marginTop={3}
-                                    marginBottom={2}
-                                >
-                                    <Typography sx={{ color: 'white', fontSize: '16px', fontWeight: 500 }}>CHIPZ to Harvest</Typography>
-                                    <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>LOCKED</Typography>
-                                </Grid>
-                                <Grid item display="flex" flexDirection="row" alignItems="center" justifyContent="space-between">
-                                    <Typography sx={{ color: 'white', fontSize: '16px', fontWeight: 500 }}>~$0.00</Typography>
-                                </Grid>
-                                <Grid
-                                    item
-                                    display="flex"
-                                    flexDirection="row"
-                                    alignItems="center"
-                                    justifyContent="space-between"
-                                    marginTop={4}
-                                >
-                                    <Typography sx={{ color: 'white', fontSize: '16px', fontWeight: 500 }}>CHIPZ in Wallet</Typography>
-                                    <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>LOCKED</Typography>
-                                </Grid>
-                                <Grid item display="flex" flexDirection="row" alignItems="center" justifyContent="space-between">
-                                    <Typography sx={{ color: 'white', fontSize: '16px', fontWeight: 500 }}>~$0.00</Typography>
-                                </Grid>
-                                <Grid
-                                    item
+                            <Box padding="15px" display="flex" flexDirection="column" justifyContent="space-between" height="100%">
+                                <Box>
+                                    <Box
+                                        display="flex"
+                                        flexDirection="row"
+                                        alignItems="center"
+                                        justifyContent="space-between"
+                                        marginTop={3}
+                                        marginBottom={2}
+                                    >
+                                        <Typography sx={{ color: 'white', fontSize: '16px', fontWeight: 500 }}>CHIPZ to Harvest</Typography>
+                                        <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>LOCKED</Typography>
+                                    </Box>
+                                    <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between">
+                                        <Typography sx={{ color: 'white', fontSize: '16px', fontWeight: 500 }}>~$0.00</Typography>
+                                    </Box>
+                                    <Box
+                                        display="flex"
+                                        flexDirection="row"
+                                        alignItems="center"
+                                        justifyContent="space-between"
+                                        marginTop={4}
+                                    >
+                                        <Typography sx={{ color: 'white', fontSize: '16px', fontWeight: 500 }}>CHIPZ in Wallet</Typography>
+                                        <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>LOCKED</Typography>
+                                    </Box>
+                                    <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between">
+                                        <Typography sx={{ color: 'white', fontSize: '16px', fontWeight: 500 }}>~$0.00</Typography>
+                                    </Box>
+                                </Box>
+                                <Box
                                     display="flex"
                                     flexDirection="row"
                                     alignItems="center"
                                     justifyContent="center"
                                     marginTop={4}
-                                    marginBottom={1}
+                                    marginBottom={2.5}
                                 >
                                     <Button
                                         sx={{
@@ -87,12 +95,19 @@ const Dashboard = () => {
                                     >
                                         Unlock Wallet
                                     </Button>
-                                </Grid>
-                            </Grid>
+                                </Box>
+                            </Box>
                         </Grid>
                     </Grid>
-                    <Grid item flex={1} lg={5} md={5} sm={10} xs={10}>
-                        <Grid item borderRadius="16px" bgcolor="#1A2033" boxShadow="0px 40px 60px -50px #000000" padding="30px">
+                    <Grid item flex={1} lg={5} md={5} sm={12}>
+                        <Grid
+                            item
+                            borderRadius="16px"
+                            bgcolor="#1A2033"
+                            boxShadow="0px 40px 60px -50px #000000"
+                            padding="30px"
+                            height="100%"
+                        >
                             <Typography sx={{ color: '#CE2179', fontSize: '23px', fontWeight: 600 }}>Announcement</Typography>
                             <Grid item>
                                 <Grid
@@ -108,8 +123,15 @@ const Dashboard = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item flex={1} lg={5} md={5} sm={10} xs={10}>
-                        <Grid item borderRadius="16px" bgcolor="#1A2033" boxShadow="0px 40px 60px -50px #000000" padding="30px">
+                    <Grid item flex={1} lg={5} md={5} sm={12}>
+                        <Grid
+                            item
+                            borderRadius="16px"
+                            bgcolor="#1A2033"
+                            boxShadow="0px 40px 60px -50px #000000"
+                            padding="30px"
+                            height="100%"
+                        >
                             <Typography
                                 sx={{
                                     color: '#CE2179',
@@ -138,8 +160,15 @@ const Dashboard = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item flex={1} lg={5} md={5} sm={10} xs={10}>
-                        <Grid item borderRadius="16px" bgcolor="#1A2033" boxShadow="0px 40px 60px -50px #000000" padding="30px">
+                    <Grid item flex={1} lg={5} md={5} sm={12}>
+                        <Grid
+                            item
+                            borderRadius="16px"
+                            bgcolor="#1A2033"
+                            boxShadow="0px 40px 60px -50px #000000"
+                            padding="30px"
+                            height="100%"
+                        >
                             <Typography sx={{ color: '#CE2179', fontSize: '23px', fontWeight: 600 }}>Total Value Locked(TVL)</Typography>
                             <Grid item padding="40px 10px">
                                 <Grid
@@ -160,6 +189,9 @@ const Dashboard = () => {
                     </Grid>
                 </Grid>
             </Grid>
+            <Box zIndex="-1" position="absolute" left="calc(100% - 400px)" top="calc(100% - 150px)">
+                <img src={logoback} alt="logo back" style={{ width: '400px' }} />
+            </Box>
         </Grid>
     );
 };
