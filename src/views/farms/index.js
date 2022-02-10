@@ -3,6 +3,7 @@ import { Typography, Box, Switch, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import farming from '../../assets/images/farm-ethereum.png';
+import logoback from '../../assets/images/logo_back.png';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 const IOSSwitch = styled(Switch)(() => ({
@@ -217,6 +218,9 @@ const Farms = () => (
                     </Button>
                 </Box>
             </Box>
+        </Box>
+        <Box zIndex="-1" position="absolute" left="calc(100% - 400px)" top="calc(100vh - 400px)">
+            <img src={logoback} alt="logo back" style={{ width: '400px' }} />
         </Box>
     </Box>
 );

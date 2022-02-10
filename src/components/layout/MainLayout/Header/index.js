@@ -75,7 +75,8 @@ const Header = ({ handleLeftDrawerToggle, clickMetamask }) => {
 };
 
 Header.propTypes = {
-    handleLeftDrawerToggle: PropTypes.func
+    handleLeftDrawerToggle: PropTypes.func,
+    clickMetamask: PropTypes.func
 };
 
 export default Header;

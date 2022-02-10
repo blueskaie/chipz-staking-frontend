@@ -118,7 +118,9 @@ const MainLayout = () => {
                         position="absolute"
                         zIndex="10"
                         width="100%"
-                        height="100%"
+                        height="calc(100vh + 250px)"
+                        left="0px"
+                        top="0px"
                         bgcolor="rgba(17, 21, 34, 0.49)"
                         style={{ backdropFilter: 'blur(28px)' }}
                     >
@@ -133,8 +135,8 @@ const MainLayout = () => {
                             boxShadow="0px 2px 5px rgba(0, 0, 0, 0.1)"
                             bgcolor="#111522"
                             width="500px"
-                            top="calc(100vh - 1300px / 2)"
-                            left="calc((100vw - 1000px) / 2)"
+                            top="calc(100vh - 1000px / 2)"
+                            left="calc((100vw - 500px) / 2)"
                         >
                             <Box
                                 display="flex"
@@ -152,7 +154,7 @@ const MainLayout = () => {
                                 <Typography fontSize="16px" fontWeight="400">
                                     Connect to a Wallet
                                 </Typography>
-                                <Button>
+                                <Button onClick={() => setShowMetamask(false)}>
                                     <Typography fontSize="16px" fontWeight="400" color="white">
                                         X
                                     </Typography>
