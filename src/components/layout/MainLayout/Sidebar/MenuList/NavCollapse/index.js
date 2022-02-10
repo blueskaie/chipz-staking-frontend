@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import { Collapse, List, ListItemButton, ListItemIcon, ListItemText, Typography, Box } from '@mui/material';
+// import { useTheme } from '@mui/material/styles';
+import { Collapse, Typography, Box } from '@mui/material';
 
 // project imports
 import NavItem from '../NavItem';
@@ -16,8 +16,8 @@ import { IconChevronDown, IconChevronUp } from '@tabler/icons';
 // ==============================|| SIDEBAR MENU LIST COLLAPSE ITEMS ||============================== //
 
 const NavCollapse = ({ menu, level }) => {
-    const theme = useTheme();
-    const customization = useSelector((state) => state.customization);
+    // const theme = useTheme();
+    // const customization = useSelector((state) => state.customization);
 
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState(null);

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Divider, List, Typography, Box } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 // project imports
 import NavItem from '../NavItem';
@@ -11,7 +11,7 @@ import NavCollapse from '../NavCollapse';
 import logo from '../../../../../../assets/images/logo.png';
 import telegram from '../../../../../../assets/images/telegram.png';
 import discord from '../../../../../../assets/images/discord.png';
-import { typography } from '@mui/system';
+// import { typography } from '@mui/system';
 
 // ==============================|| SIDEBAR MENU LIST GROUP ||============================== //
 

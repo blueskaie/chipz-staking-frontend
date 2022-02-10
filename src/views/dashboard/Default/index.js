@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // material-ui
-import { Grid, Box, Typography, Button } from '@mui/material';
+import { Grid, Typography, Button } from '@mui/material';
 
 // project imports
 // import EarningCard from './EarningCard';
@@ -30,8 +30,8 @@ const Dashboard = () => {
                     <Typography sx={{ color: 'white', fontSize: '30px', fontWeight: 600 }}>CHIPZ STAKING PLATFORM</Typography>
                     <Typography sx={{ fontSize: '16px', fontWeight: 500 }}>Revolutionizing Reward Points</Typography>
                 </Grid>
-                <Grid item paddingY={8} paddingX={5} display="flex" flexWrap="wrap" rowGap="40px" justifyContent="space-around">
-                    <Grid item flex={1} lg={5} md={5} sm={10} xs={10}>
+                <Grid item paddingY={8} paddingX={1} display="flex" flexWrap="wrap" rowGap="40px" justifyContent="space-around">
+                    <Grid item flex={1} lg={5} md={5} sm={12}>
                         <Grid item borderRadius="16px" bgcolor="#1A2033" boxShadow="0px 40px 60px -50px #000000" padding="30px">
                             <Typography sx={{ color: '#CE2179', fontSize: '23px', fontWeight: 600 }}>Farms & Staking</Typography>
                             <Grid item padding="15px">
@@ -91,7 +91,7 @@ const Dashboard = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item flex={1} lg={5} md={5} sm={10} xs={10}>
+                    <Grid item flex={1} lg={5} md={5} sm={12}>
                         <Grid item borderRadius="16px" bgcolor="#1A2033" boxShadow="0px 40px 60px -50px #000000" padding="30px">
                             <Typography sx={{ color: '#CE2179', fontSize: '23px', fontWeight: 600 }}>Announcement</Typography>
                             <Grid item>
@@ -108,7 +108,7 @@ const Dashboard = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item flex={1} lg={5} md={5} sm={10} xs={10}>
+                    <Grid item flex={1} lg={5} md={5} sm={12}>
                         <Grid item borderRadius="16px" bgcolor="#1A2033" boxShadow="0px 40px 60px -50px #000000" padding="30px">
                             <Typography
                                 sx={{
@@ -138,7 +138,7 @@ const Dashboard = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item flex={1} lg={5} md={5} sm={10} xs={10}>
+                    <Grid item flex={1} lg={5} md={5} sm={12}>
                         <Grid item borderRadius="16px" bgcolor="#1A2033" boxShadow="0px 40px 60px -50px #000000" padding="30px">
                             <Typography sx={{ color: '#CE2179', fontSize: '23px', fontWeight: 600 }}>Total Value Locked(TVL)</Typography>
                             <Grid item padding="40px 10px">
