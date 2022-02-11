@@ -1,13 +1,8 @@
 // assets
-import { IconTypography, IconPalette, IconShadow, IconWindmill } from '@tabler/icons';
-
-// constant
-const icons = {
-    IconTypography,
-    IconPalette,
-    IconShadow,
-    IconWindmill
-};
+import home from '../assets/images/home.png';
+import farms from '../assets/images/farms.png';
+import info from '../assets/images/info.png';
+import more from '../assets/images/more.png';
 
 // ==============================|| MAIN MENU ITEMS ||============================== //
 
@@ -20,7 +15,7 @@ const main = {
             title: 'Home',
             type: 'item',
             url: '/',
-            icon: icons.IconTypography,
+            icon: home,
             breadcrumbs: false
         },
         {
@@ -28,14 +23,14 @@ const main = {
             title: 'Farms',
             type: 'item',
             url: '/farms',
-            icon: icons.IconPalette,
+            icon: farms,
             breadcrumbs: false
         },
         {
             id: 'info',
             title: 'Info',
             type: 'collapse',
-            icon: icons.IconWindmill,
+            icon: info,
             children: [
                 {
                     id: 'pancake-swap',
@@ -78,7 +73,7 @@ const main = {
             id: 'more',
             title: 'More',
             type: 'collapse',
-            icon: icons.IconPalette,
+            icon: more,
             children: [
                 {
                     id: 'tabler-icons',

@@ -35,9 +35,17 @@ const NavGroup = ({ item }) => {
     });
 
     return (
-        <Box display="flex" flexDirection="column" alignItems="space-between" height="100%" justifyContent="space-between">
+        <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="space-between"
+            height="100%"
+            justifyContent="space-between"
+            paddingTop="32px"
+            paddingBottom="10px"
+        >
             <Box display="flex" width="100%" flexDirection="column">
-                <Box width="100%" sx={{ borderBottom: '1px solid rgba(255, 255, 255, 0.25)' }}>
+                <Box width="100%">
                     <Box
                         subheader={
                             item.title && (
@@ -63,8 +71,18 @@ const NavGroup = ({ item }) => {
                         {items}
                     </Box>
                 </Box>
-                <Box display="flex" flexDirection="row" alignItems="center" justifyContent="flex-start" padding="18px">
-                    <img src={logo} alt="logo" width="32px" />
+                <Box
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                    justifyContent="flex-start"
+                    marginY="25px"
+                    marginRight="20px"
+                    marginLeft="25px"
+                    paddingY="32px"
+                    sx={{ borderTop: '1px solid rgba(255, 255, 255, 0.25)' }}
+                >
+                    <img src={logo} alt="logo" width="35px" />
                     <Typography fontSize="20px" color="white">
                         $0.039
                     </Typography>
@@ -76,8 +94,8 @@ const NavGroup = ({ item }) => {
                     flexDirection="row"
                     alignItems="center"
                     justifyContent="center"
-                    gap="35px"
-                    padding="18px"
+                    gap="30px"
+                    padding="25px"
                     color="white"
                     fontSize="20px"
                 >

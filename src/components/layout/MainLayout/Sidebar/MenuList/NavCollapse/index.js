@@ -33,7 +33,7 @@ const NavCollapse = ({ menu, level }) => {
             case 'collapse':
                 return <NavCollapse key={item.id} menu={item} level={level + 1} />;
             case 'item':
-                return <NavItem key={item.id} item={item} level={level + 1} />;
+                return <NavItem key={item.id} item={item} level={level + 1} selected={selected} />;
             default:
                 return (
                     <Typography key={item.id} variant="h6" color="error" align="center">
@@ -43,9 +43,8 @@ const NavCollapse = ({ menu, level }) => {
         }
     });
 
-    const Icon = menu.icon;
     const menuIcon = menu.icon ? (
-        <Icon strokeWidth={1.5} size="1.3rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+        <img src={menu.icon} alt="icon" width="23px" />
     ) : (
         <FiberManualRecordIcon
             sx={{
@@ -74,15 +73,15 @@ const NavCollapse = ({ menu, level }) => {
                 onClick={handleClick}
             >
                 <Box display="flex" flexDirection="row" alignItems="center" justifyContent="flex-start">
-                    <Box sx={{ my: 'auto', minWidth: !menu.icon ? 18 : 36 }}>{menuIcon}</Box>
+                    <Box sx={{ my: 'auto', minWidth: !menu.icon ? 18 : 36, marginRight: '5px' }}>{menuIcon}</Box>
                     <Typography variant="h4" color={selected === menu.id ? 'white' : '#555555'} sx={{ my: 'auto' }}>
                         {menu.title}
                     </Typography>
                 </Box>
                 {open ? (
-                    <IconChevronUp stroke={3} size="1.5rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+                    <IconChevronUp stroke={3} size="1.5rem" style={{ marginTop: 'auto', marginBottom: 'auto', marginRight: 16 }} />
                 ) : (
-                    <IconChevronDown stroke={3} size="1.5rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+                    <IconChevronDown stroke={3} size="1.5rem" style={{ marginTop: 'auto', marginBottom: 'auto', marginRight: 16 }} />
                 )}
             </Box>
             <Collapse in={open} timeout="auto" unmountOnExit>

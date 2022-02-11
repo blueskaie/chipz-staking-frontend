@@ -13,8 +13,6 @@ import { Grid, Typography, Button, Box } from '@mui/material';
 // import { textAlign } from '@mui/system';
 import { gridSpacing } from 'store/constant';
 
-import Announcement from '../../../assets/images/announcement.png';
-
 import logoback from '../../../assets/images/logo_back.png';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
@@ -28,11 +26,11 @@ const Dashboard = () => {
     return (
         <Grid spacing={gridSpacing}>
             <Grid item xs={12} color="#8D91A0">
-                <Grid item display="flex" flexDirection="column">
+                <Grid item display="flex" flexDirection="column" paddingX="100px">
                     <Typography sx={{ color: 'white', fontSize: '30px', fontWeight: 600 }}>CHIPZ STAKING PLATFORM</Typography>
                     <Typography sx={{ fontSize: '16px', fontWeight: 500 }}>Revolutionizing Reward Points</Typography>
                 </Grid>
-                <Grid item paddingY={8} paddingX={1} display="flex" flexWrap="wrap" rowGap="40px" justifyContent="space-around">
+                <Grid item paddingY={8} paddingX={10} display="flex" flexWrap="wrap" rowGap="40px" columnGap="40px" justifyContent="center">
                     <Grid item flex={1} lg={5} md={5} sm={12}>
                         <Grid
                             item
@@ -118,7 +116,9 @@ const Dashboard = () => {
                                     justifyContent="space-between"
                                     marginTop={1}
                                 >
-                                    <img src={Announcement} alt="announcement" style={{ width: '100%' }} />
+                                    <a href="https://medium.com/@mychipzio" rel="noreferrer noopener" target="_blank">
+                                        {' '}
+                                    </a>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -189,7 +189,7 @@ const Dashboard = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Box zIndex="-1" position="absolute" left="calc(100% - 400px)" top="calc(100% - 150px)">
+            <Box zIndex="-1" position="absolute" left="calc(100% - 400px)" top="calc(100% + 100px)">
                 <img src={logoback} alt="logo back" style={{ width: '400px' }} />
             </Box>
         </Grid>
