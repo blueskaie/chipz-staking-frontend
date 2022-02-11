@@ -16,24 +16,13 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 // ==============================|| SIDEBAR MENU LIST ITEMS ||============================== //
 
-const NavItem = ({ item, level }) => {
+const NavItem = ({ item, level, selected }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const customization = useSelector((state) => state.customization);
     const matchesSM = useMediaQuery(theme.breakpoints.down('lg'));
 
-    const Icon = item.icon;
-    const itemIcon = item?.icon ? (
-        <Icon stroke={1.5} size="1.3rem" />
-    ) : (
-        <FiberManualRecordIcon
-            sx={{
-                width: customization.isOpen.findIndex((id) => id === item?.id) > -1 ? 8 : 6,
-                height: customization.isOpen.findIndex((id) => id === item?.id) > -1 ? 8 : 6
-            }}
-            fontSize={level > 0 ? 'inherit' : 'medium'}
-        />
-    );
+    const itemIcon = item?.icon && <img src={item?.icon} alt="icon" width="23px" />;
 
     let itemTarget = '_self';
     if (item.target) {
@@ -83,8 +72,17 @@ const NavItem = ({ item, level }) => {
             selected={customization.isOpen.findIndex((id) => id === item.id) > -1}
             onClick={() => itemHandler(item.id)}
         >
-            <Box display="flex" flexDirection="row" justifyContent="flex-start" width="100%">
-                <Box sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36 }}>{itemIcon}</Box>
+            <Box display="flex" flexDirection="row" alignItems="center" justifyContent="flex-start" width="100%">
+                <Box
+                    sx={{
+                        my: 'auto',
+                        minWidth: !item?.icon ? 18 : 36,
+                        marginRight: item?.icon ? '5px' : '0',
+                        paddingTop: item?.icon ? '5px' : '0'
+                    }}
+                >
+                    {itemIcon}
+                </Box>
                 <Typography variant="h4" color={customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'white' : '#555555'}>
                     {item.title}
                 </Typography>
@@ -95,7 +93,8 @@ const NavItem = ({ item, level }) => {
 
 NavItem.propTypes = {
     item: PropTypes.object,
-    level: PropTypes.number
+    level: PropTypes.number,
+    selected: PropTypes.number
 };
 
 export default NavItem;

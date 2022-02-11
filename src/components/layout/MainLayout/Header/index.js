@@ -60,7 +60,7 @@ const Header = ({ handleLeftDrawerToggle, clickMetamask }) => {
                     color: 'white',
                     fontSize: '15px',
                     fontWeight: 600,
-                    padding: '3px 40px',
+                    padding: '3px 30px',
                     backgroundColor: '#CE2179',
                     '&:hover': { backgroundColor: '#BE1169' },
                     boxShadow: '0px 8px 0px #8F1754',
