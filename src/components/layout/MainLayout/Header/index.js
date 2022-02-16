@@ -16,7 +16,41 @@ import { IconMenu2 } from '@tabler/icons';
 
 const Header = ({ handleLeftDrawerToggle, clickMetamask }) => {
     const theme = useTheme();
-    const { isActive, account } = useMetaMask();
+    const { isActive, account, wrongNetwork, switchNetwork } = useMetaMask();
+
+    const connectBtn = !wrongNetwork ? (
+        <Button
+            sx={{
+                color: 'white',
+                fontSize: '15px',
+                fontWeight: 600,
+                padding: '3px 30px',
+                backgroundColor: '#CE2179',
+                '&:hover': { backgroundColor: '#BE1169' },
+                boxShadow: '0px 8px 0px #8F1754',
+                borderRadius: '7px'
+            }}
+            onClick={clickMetamask}
+        >
+            Connect
+        </Button>
+    ) : (
+        <Button
+            sx={{
+                color: 'white',
+                fontSize: '15px',
+                fontWeight: 600,
+                padding: '3px 30px',
+                backgroundColor: '#CE2179',
+                '&:hover': { backgroundColor: '#BE1169' },
+                boxShadow: '0px 8px 0px #8F1754',
+                borderRadius: '7px'
+            }}
+            onClick={switchNetwork}
+        >
+            WrongNetwork
+        </Button>
+    );
 
     return (
         <>
@@ -75,21 +109,7 @@ const Header = ({ handleLeftDrawerToggle, clickMetamask }) => {
                     {formatString(account)}
                 </Button>
             ) : (
-                <Button
-                    sx={{
-                        color: 'white',
-                        fontSize: '15px',
-                        fontWeight: 600,
-                        padding: '3px 30px',
-                        backgroundColor: '#CE2179',
-                        '&:hover': { backgroundColor: '#BE1169' },
-                        boxShadow: '0px 8px 0px #8F1754',
-                        borderRadius: '7px'
-                    }}
-                    onClick={clickMetamask}
-                >
-                    Connect
-                </Button>
+                connectBtn
             )}
         </>
     );
