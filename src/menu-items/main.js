@@ -36,36 +36,41 @@ const main = {
                     id: 'pancake-swap',
                     title: 'Pancake Swap',
                     type: 'item',
-                    url: '/icons/tabler-icons',
-                    breadcrumbs: false
+                    url: 'https://pancakeswap.finance/info/token/0x0fABCB70eeDA798F9241F4bb11cceEa7d93B157a',
+                    breadcrumbs: false,
+                    external: true
                 },
                 {
                     id: 'dextools',
                     title: 'DexTools',
                     type: 'item',
-                    url: '/icons/material-icons',
-                    breadcrumbs: false
+                    url: 'https://www.dextools.io/app/bsc/pair-explorer/0x2e734b4162b2f91d0583442dae272909493a4e8b',
+                    breadcrumbs: false,
+                    external: true
                 },
                 {
                     id: 'coinmarketcap',
                     title: 'CoinMarketCap',
                     type: 'item',
-                    url: '/icons/material-icons',
-                    breadcrumbs: false
+                    url: 'https://coinmarketcap.com/currencies/chipz/',
+                    breadcrumbs: false,
+                    external: true
                 },
                 {
                     id: 'dexguru',
                     title: 'DexGuru',
                     type: 'item',
-                    url: '/icons/material-icons',
-                    breadcrumbs: false
+                    url: 'https://dex.guru/token/0x0fabcb70eeda798f9241f4bb11cceea7d93b157a-bsc',
+                    breadcrumbs: false,
+                    external: true
                 },
                 {
                     id: 'bogged',
                     title: 'Bogged',
                     type: 'item',
-                    url: '/icons/material-icons',
-                    breadcrumbs: false
+                    url: 'https://charts.bogged.finance/?token=0x0fABCB70eeDA798F9241F4bb11cceEa7d93B157a',
+                    breadcrumbs: false,
+                    external: true
                 }
             ]
         },
@@ -76,18 +81,28 @@ const main = {
             icon: more,
             children: [
                 {
-                    id: 'tabler-icons',
-                    title: 'Tabler Icons',
+                    id: 'road-map',
+                    title: 'Roadmap',
                     type: 'item',
-                    url: '/icons/tabler-icons',
-                    breadcrumbs: false
+                    url: 'https://mychipz.io/',
+                    breadcrumbs: false,
+                    external: true
                 },
                 {
-                    id: 'material-icons',
-                    title: 'Material Icons',
+                    id: 'white-paper',
+                    title: 'Whitepaper',
                     type: 'item',
-                    url: '/icons/material-icons',
-                    breadcrumbs: false
+                    url: 'https://mychipz.io/wp-content/uploads/2021/07/CHPZ-technical-whitepaper.pdf',
+                    breadcrumbs: false,
+                    external: true
+                },
+                {
+                    id: 'view-media-kit',
+                    title: 'VIEW MEDIA KIT',
+                    type: 'item',
+                    url: 'https://mychipz.io/media-kit-2/',
+                    breadcrumbs: false,
+                    external: true
                 }
             ]
         }
