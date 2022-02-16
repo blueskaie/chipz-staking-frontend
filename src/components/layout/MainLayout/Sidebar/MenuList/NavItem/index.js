@@ -12,11 +12,11 @@ import { MENU_OPEN, SET_MENU } from 'store/actions';
 import config from 'config';
 
 // assets
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+// import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 // ==============================|| SIDEBAR MENU LIST ITEMS ||============================== //
 
-const NavItem = ({ item, level, selected }) => {
+const NavItem = ({ item, level }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const customization = useSelector((state) => state.customization);
@@ -33,7 +33,7 @@ const NavItem = ({ item, level, selected }) => {
         component: forwardRef((props, ref) => <Link ref={ref} {...props} to={`${config.basename}${item.url}`} target={itemTarget} />)
     };
     if (item?.external) {
-        listItemProps = { component: 'a', href: item.url, target: itemTarget };
+        listItemProps = { component: 'a', href: item.url, target: '_blank' };
     }
 
     const itemHandler = (id) => {
@@ -67,6 +67,7 @@ const NavItem = ({ item, level, selected }) => {
                     customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'rgba(206, 33, 121, 0.1)' : 'transparent !important',
                 color: customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'white' : '#555555',
                 py: level > 1 ? 1 : 1.25,
+                width: '100%',
                 pl: `${level * 24}px`
             }}
             selected={customization.isOpen.findIndex((id) => id === item.id) > -1}

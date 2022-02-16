@@ -1,16 +1,9 @@
 import { useEffect, useState } from 'react';
 
 // material-ui
-import { Grid, Typography, Button, Box } from '@mui/material';
+import { Grid, Typography, Button, Box, makeStyles, useTheme } from '@mui/material';
+import { LinkPreview } from '@dhaiwat10/react-link-preview';
 
-// project imports
-// import EarningCard from './EarningCard';
-// import PopularCard from './PopularCard';
-// import TotalOrderLineChartCard from './TotalOrderLineChartCard';
-// import TotalIncomeDarkCard from './TotalIncomeDarkCard';
-// import TotalIncomeLightCard from './TotalIncomeLightCard';
-// import TotalGrowthBarChart from './TotalGrowthBarChart';
-// import { textAlign } from '@mui/system';
 import { gridSpacing } from 'store/constant';
 
 import logoback from '../../../assets/images/logo_back.png';
@@ -19,6 +12,17 @@ import logoback from '../../../assets/images/logo_back.png';
 
 const Dashboard = () => {
     const [isLoading, setLoading] = useState(true);
+    // const theme = useTheme();
+    // const useStyles = makeStyles(
+    //     theme({
+    //         root: {
+    //             [theme.breakpoints.between('md', 'lg')]: {
+    //                 paddingX: '10px'
+    //             }
+    //         }
+    //     })
+    // );
+    // const classes = useStyles(theme);
     useEffect(() => {
         setLoading(false);
     }, []);
@@ -26,12 +30,21 @@ const Dashboard = () => {
     return (
         <Grid spacing={gridSpacing}>
             <Grid item xs={12} color="#8D91A0">
-                <Grid item display="flex" flexDirection="column" paddingX="100px">
+                <Grid item display="flex" flexDirection="column" paddingX="50px">
                     <Typography sx={{ color: 'white', fontSize: '30px', fontWeight: 600 }}>CHIPZ STAKING PLATFORM</Typography>
                     <Typography sx={{ fontSize: '16px', fontWeight: 500 }}>Revolutionizing Reward Points</Typography>
                 </Grid>
-                <Grid item paddingY={8} paddingX={10} display="flex" flexWrap="wrap" rowGap="40px" columnGap="40px" justifyContent="center">
-                    <Grid item flex={1} lg={5} md={5} sm={12}>
+                <Grid
+                    item
+                    paddingY={8}
+                    paddingX="10px"
+                    display="flex"
+                    flexWrap="wrap"
+                    rowGap="40px"
+                    columnGap="40px"
+                    justifyContent="center"
+                >
+                    <Grid item flex={1} lg={5} md={5} sm={12} xs={12}>
                         <Grid
                             item
                             borderRadius="16px"
@@ -97,7 +110,7 @@ const Dashboard = () => {
                             </Box>
                         </Grid>
                     </Grid>
-                    <Grid item flex={1} lg={5} md={5} sm={12}>
+                    <Grid item flex={1} lg={5} md={5} sm={12} xs={12}>
                         <Grid
                             item
                             borderRadius="16px"
@@ -116,9 +129,11 @@ const Dashboard = () => {
                                     justifyContent="space-between"
                                     marginTop={1}
                                 >
-                                    <a href="https://medium.com/@mychipzio" rel="noreferrer noopener" target="_blank">
-                                        {' '}
-                                    </a>
+                                    <LinkPreview
+                                        url="https://marker.medium.com/the-next-big-creator-opportunity-omnichannel-experiences-41d82bd703ea"
+                                        width="100%"
+                                        minWidth="400px"
+                                    />
                                 </Grid>
                             </Grid>
                         </Grid>
