@@ -16,7 +16,7 @@ import { IconMenu2 } from '@tabler/icons';
 
 const Header = ({ handleLeftDrawerToggle, clickMetamask }) => {
     const theme = useTheme();
-    const { disconnect, isActive, account } = useMetaMask();
+    const { isActive, account } = useMetaMask();
 
     return (
         <>
@@ -70,7 +70,7 @@ const Header = ({ handleLeftDrawerToggle, clickMetamask }) => {
                         boxShadow: '0px 8px 0px #8F1754',
                         borderRadius: '7px'
                     }}
-                    onClick={disconnect}
+                    onClick={clickMetamask}
                 >
                     {formatString(account)}
                 </Button>

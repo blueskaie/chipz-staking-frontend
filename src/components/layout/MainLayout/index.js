@@ -77,7 +77,7 @@ const MainLayout = () => {
         dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
     };
     const [showMetamask, setShowMetamask] = useState(false);
-    const { connect } = useMetaMask();
+    const { connect, disconnect, isActive } = useMetaMask();
 
     const clickMetamask = () => {
         setShowMetamask(!showMetamask);
@@ -86,6 +86,11 @@ const MainLayout = () => {
     const connectWallet = async () => {
         // Check if MetaMask is installed on user's browser
         await connect();
+        setShowMetamask(!showMetamask);
+    };
+
+    const disconnectWallet = async () => {
+        await disconnect();
         setShowMetamask(!showMetamask);
     };
 
@@ -171,24 +176,45 @@ const MainLayout = () => {
                                     </Typography>
                                 </Button>
                             </Box>
-                            <Button
-                                sx={{
-                                    color: 'white',
-                                    padding: '10px 40px',
-                                    backgroundColor: '#CE2179',
-                                    '&:hover': { backgroundColor: '#BE1169' },
-                                    boxShadow: '0px 8px 0px #8F1754',
-                                    borderRadius: '7px',
-                                    width: '250px',
-                                    marginY: '30px'
-                                }}
-                                onClick={connectWallet}
-                            >
-                                <Typography fontSize="18px" fontWeight="600" mr="20px">
-                                    Metamask
-                                </Typography>
-                                <img src={metamask} alt="metamask" style={{ width: '32px' }} />
-                            </Button>
+                            {!isActive ? (
+                                <Button
+                                    sx={{
+                                        color: 'white',
+                                        padding: '10px 40px',
+                                        backgroundColor: '#CE2179',
+                                        '&:hover': { backgroundColor: '#BE1169' },
+                                        boxShadow: '0px 8px 0px #8F1754',
+                                        borderRadius: '7px',
+                                        width: '250px',
+                                        marginY: '30px'
+                                    }}
+                                    onClick={connectWallet}
+                                >
+                                    <Typography fontSize="18px" fontWeight="600" mr="20px">
+                                        Metamask
+                                    </Typography>
+                                    <img src={metamask} alt="metamask" style={{ width: '32px' }} />
+                                </Button>
+                            ) : (
+                                <Button
+                                    sx={{
+                                        color: 'white',
+                                        padding: '10px 40px',
+                                        backgroundColor: '#CE2179',
+                                        '&:hover': { backgroundColor: '#BE1169' },
+                                        boxShadow: '0px 8px 0px #8F1754',
+                                        borderRadius: '7px',
+                                        width: '250px',
+                                        marginY: '30px'
+                                    }}
+                                    onClick={disconnectWallet}
+                                >
+                                    <Typography fontSize="18px" fontWeight="600" mr="20px">
+                                        Disconnect
+                                    </Typography>
+                                    <img src={metamask} alt="metamask" style={{ width: '32px' }} />
+                                </Button>
+                            )}
                         </Box>
                     </Box>
                 )}
