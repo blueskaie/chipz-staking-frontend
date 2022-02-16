@@ -104,6 +104,7 @@ const MainLayout = () => {
                 color="inherit"
                 elevation={0}
                 sx={{
+                    zIndex: '1',
                     bgcolor: theme.palette.background.default,
                     borderBottom: '0.5px solid rgba(255, 255, 255, 0.25)',
                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
@@ -123,10 +124,10 @@ const MainLayout = () => {
                 <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
                 {showMetamask && (
                     <Box
-                        position="absolute"
+                        position="fixed"
                         zIndex="10"
                         width="100%"
-                        height="calc(100vh + 250px)"
+                        height="100%"
                         left="0px"
                         top="0px"
                         bgcolor="rgba(17, 21, 34, 0.49)"
@@ -143,8 +144,10 @@ const MainLayout = () => {
                             boxShadow="0px 2px 5px rgba(0, 0, 0, 0.1)"
                             bgcolor="#111522"
                             width="500px"
-                            top="calc(100vh - 1000px / 2)"
-                            left="calc((100vw - 500px) / 2)"
+                            top="50%"
+                            left="50%"
+                            zIndex="11"
+                            style={{ transform: 'translate(-50%, -50%)' }}
                         >
                             <Box
                                 display="flex"
