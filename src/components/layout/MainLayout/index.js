@@ -13,6 +13,7 @@ import Sidebar from './Sidebar';
 import navigation from 'menu-items';
 import { drawerWidth } from 'store/constant';
 import { SET_MENU } from 'store/actions';
+import useMetaMask from 'hooks/metamask';
 
 // assets
 import { IconChevronRight } from '@tabler/icons';
@@ -76,8 +77,15 @@ const MainLayout = () => {
         dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
     };
     const [showMetamask, setShowMetamask] = useState(false);
+    const { connect } = useMetaMask();
 
     const clickMetamask = () => {
+        setShowMetamask(!showMetamask);
+    };
+
+    const connectWallet = async () => {
+        // Check if MetaMask is installed on user's browser
+        await connect();
         setShowMetamask(!showMetamask);
     };
 
@@ -171,7 +179,7 @@ const MainLayout = () => {
                                     width: '250px',
                                     marginY: '30px'
                                 }}
-                                onClick={clickMetamask}
+                                onClick={connectWallet}
                             >
                                 <Typography fontSize="18px" fontWeight="600" mr="20px">
                                     Metamask
