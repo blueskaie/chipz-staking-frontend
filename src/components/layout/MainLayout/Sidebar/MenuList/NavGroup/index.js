@@ -113,10 +113,10 @@ const NavGroup = ({ item }) => {
                     color="white"
                     fontSize="20px"
                 >
-                    <img src={telegram} alt="telegram" width="25px" />
-                    <img src={discord} alt="discord" width="25px" />
+                    <img src={telegram} alt="telegram" width="25px" style={{ cursor: 'pointer' }} />
+                    <img src={discord} alt="discord" width="25px" style={{ cursor: 'pointer' }} />
                 </Box>
-                <Typography fontSize="18px" color="rgba(255, 255, 255, 0.25)" fontWeight="800">
+                <Typography fontSize="18px" color="rgba(255, 255, 255, 0.25)" fontWeight="800" sx={{ cursor: 'pointer' }}>
                     CHIPZ
                 </Typography>
             </Box>

@@ -69,6 +69,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
 const MainLayout = () => {
     const theme = useTheme();
     const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
+    const isMobile = useMediaQuery('(max-width:600px)');
 
     // Handle left drawer
     const leftDrawerOpened = useSelector((state) => state.customization.opened);
@@ -80,17 +81,20 @@ const MainLayout = () => {
     const { connect, disconnect, isActive } = useMetaMask();
 
     const clickMetamask = () => {
+        document.getElementsByTagName('body')[0].style.overflow = 'hidden';
         setShowMetamask(!showMetamask);
     };
 
     const connectWallet = async () => {
         // Check if MetaMask is installed on user's browser
         await connect();
+        document.getElementsByTagName('body')[0].style.overflow = 'auto';
         setShowMetamask(!showMetamask);
     };
 
     const disconnectWallet = async () => {
         await disconnect();
+        document.getElementsByTagName('body')[0].style.overflow = 'auto';
         setShowMetamask(!showMetamask);
     };
 
@@ -100,7 +104,7 @@ const MainLayout = () => {
     }, [matchDownMd]);
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', overflow: showMetamask ? 'none' : 'hidden' }}>
             <CssBaseline />
             {/* header */}
             <AppBar
@@ -139,6 +143,17 @@ const MainLayout = () => {
                         style={{ backdropFilter: 'blur(28px)' }}
                     >
                         <Box
+                            position="absolute"
+                            left="0px"
+                            top="0px"
+                            width="100%"
+                            height="100%"
+                            onClick={() => {
+                                setShowMetamask(false);
+                                document.getElementsByTagName('body')[0].style.overflow = 'auto';
+                            }}
+                        />
+                        <Box
                             display="flex"
                             position="relative"
                             flexDirection="column"
@@ -148,7 +163,8 @@ const MainLayout = () => {
                             alignItems="center"
                             boxShadow="0px 2px 5px rgba(0, 0, 0, 0.1)"
                             bgcolor="#111522"
-                            width="500px"
+                            width={isMobile ? '90%' : '500px'}
+                            minWidth="275px"
                             top="50%"
                             left="50%"
                             zIndex="11"
@@ -170,7 +186,13 @@ const MainLayout = () => {
                                 <Typography fontSize="16px" fontWeight="400">
                                     Connect to a Wallet
                                 </Typography>
-                                <Button onClick={() => setShowMetamask(false)}>
+
+                                <Button
+                                    onClick={() => {
+                                        setShowMetamask(false);
+                                        document.getElementsByTagName('body')[0].style.overflow = 'auto';
+                                    }}
+                                >
                                     <Typography fontSize="16px" fontWeight="400" color="white">
                                         X
                                     </Typography>

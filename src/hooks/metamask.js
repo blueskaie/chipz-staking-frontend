@@ -76,6 +76,7 @@ export const MetaMaskProvider = ({ children }) => {
     // Connect to MetaMask wallet
     const connect = async () => {
         console.log('Connecting to MetaMask Wallet');
+        localStorage.setItem('isConnected', true);
         try {
             switchNetwork();
             await activate(injected);
@@ -87,6 +88,7 @@ export const MetaMaskProvider = ({ children }) => {
     // Disconnect from Metamask wallet
     const disconnect = async () => {
         console.log('Deactivating...');
+        localStorage.removeItem('isConnected');
         try {
             await deactivate();
         } catch (error) {
@@ -94,8 +96,12 @@ export const MetaMaskProvider = ({ children }) => {
         }
     };
 
+    console.log(localStorage.getItem('isConnected'));
     // Init Loading
     useEffect(() => {
+        if (localStorage == null || localStorage.getItem('isConnected') !== 'true') {
+            return;
+        }
         connect().then((val) => {
             setIsLoading(false);
         });
