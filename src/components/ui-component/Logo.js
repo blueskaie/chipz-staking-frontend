@@ -1,5 +1,5 @@
 // material-ui
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 
 import logo from '../../assets/images/logo-chipz.png';
 
@@ -13,18 +13,16 @@ import logo from '../../assets/images/logo-chipz.png';
 
 // ==============================|| LOGO SVG ||============================== //
 
-const Logo = () => {
-    const theme = useTheme();
+const Logo = () => (
+    // const theme = useTheme();
 
-    return (
-        /**
-         * if you want to use image instead of svg uncomment following, and comment out <svg> element.
-         *
-         * <img src={logo} alt="Berry" width="100" />
-         *
-         */
-        <img src={logo} alt="logo" style={{ height: '45px' }} />
-    );
-};
+    /**
+     * if you want to use image instead of svg uncomment following, and comment out <svg> element.
+     *
+     * <img src={logo} alt="Berry" width="100" />
+     *
+     */
+    <img src={logo} alt="logo" style={{ height: '45px' }} />
+);
 
 export default Logo;
