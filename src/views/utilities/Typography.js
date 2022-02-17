@@ -107,13 +107,13 @@ const Typography = () => (
                                 variant="body2"
                                 color="primary"
                                 component={Link}
-                                href="https://berrydashboard.io"
+                                href="https://chipz-staking-frontend.vercel.app"
                                 target="_blank"
                                 display="block"
                                 underline="hover"
                                 gutterBottom
                             >
-                                https://berrydashboard.io
+                                https://chipz-staking-frontend.vercel.app
                             </MuiTypography>
                         </Grid>
                     </Grid>
