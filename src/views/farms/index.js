@@ -65,7 +65,7 @@ const IOSSwitch = styled(Switch)(() => ({
 }));
 
 const ActiveSwitch = styled(Switch)(() => ({
-    width: 250,
+    width: 210,
     height: 40,
     padding: 0,
     '& .MuiSwitch-switchBase': {
@@ -95,7 +95,7 @@ const ActiveSwitch = styled(Switch)(() => ({
         backgroundColor: '#CE2179',
         border: '1px solid #CE2179',
         borderRadius: 20,
-        width: 140,
+        width: 100,
         height: 40,
         '&:before': {
             content: "'Active'",
@@ -131,17 +131,8 @@ const Farms = () => {
                         Deposit fee will be used to buy back CHPZ
                     </Typography>
                 </Box>
-                <Box
-                    display="flex"
-                    flexWrap="wrap"
-                    rowGap="40px"
-                    columnGap="40px"
-                    flexDirection="row"
-                    alignItems="center"
-                    justifyContent="center"
-                    pt="20px"
-                >
-                    <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" mr="40px">
+                <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center" pt="20px">
+                    <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" mr="10px">
                         <IOSSwitch />
                         <Typography pl="10px" color="#8D91A0">
                             Staked Only

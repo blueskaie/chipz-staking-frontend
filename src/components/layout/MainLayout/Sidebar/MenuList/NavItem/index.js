@@ -55,9 +55,6 @@ const NavItem = ({ item, level }) => {
 
     return (
         <Button
-            display="flex"
-            flexDirection="row"
-            alignItems="center"
             {...listItemProps}
             disabled={item.disabled}
             sx={{
@@ -95,7 +92,7 @@ const NavItem = ({ item, level }) => {
 NavItem.propTypes = {
     item: PropTypes.object,
     level: PropTypes.number,
-    selected: PropTypes.number
+    selected: PropTypes.string
 };
 
 export default NavItem;
