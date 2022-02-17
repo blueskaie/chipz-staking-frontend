@@ -8,17 +8,28 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from 'serviceWorker';
 import App from 'App';
 import { store } from 'store';
+import { Web3ReactProvider } from '@web3-react/core';
+import Web3 from 'web3';
+import { MetaMaskProvider } from './hooks/metamask';
 
 // style + assets
 import 'assets/scss/style.scss';
+
+function getLibrary(provider, connector) {
+    return new Web3(provider);
+}
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <Web3ReactProvider getLibrary={getLibrary}>
+            <BrowserRouter>
+                <MetaMaskProvider>
+                    <App />
+                </MetaMaskProvider>
+            </BrowserRouter>
+        </Web3ReactProvider>
     </Provider>,
     document.getElementById('root')
 );

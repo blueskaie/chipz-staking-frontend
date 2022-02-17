@@ -4,7 +4,11 @@ const config = {
     basename: '/',
     defaultPath: '/dashboard/default',
     fontFamily: `'Roboto', sans-serif`,
-    borderRadius: 12
+    borderRadius: 12,
+    CHAIN_ID: 97,
+    CHAIN_NAME: 'BSC Testnet',
+    CHAIN_EXPLORER: 'https://explorer.binance.org/smart-testnet',
+    RPC_URL: 'https://data-seed-prebsc-1-s1.binance.org:8545'
 };
 
 export default config;

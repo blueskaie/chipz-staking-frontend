@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, Link } from '@mui/material';
 
 // project imports
 import NavItem from '../NavItem';
@@ -80,7 +80,21 @@ const NavGroup = ({ item }) => {
                     marginRight="20px"
                     marginLeft="25px"
                     paddingY="32px"
-                    sx={{ borderTop: '1px solid rgba(255, 255, 255, 0.25)' }}
+                    component={Link}
+                    href="https://www.coingecko.com/en/coins/chipz"
+                    sx={{
+                        borderTop: '1px solid rgba(255, 255, 255, 0.25)',
+                        '&:hover>img': {
+                            transform: 'scale(1.2)',
+                            transition: '0.3s ease-in-out'
+                        },
+                        '>img': {
+                            transform: 'scale(1)',
+                            transition: '0.3s ease-in-out'
+                        }
+                    }}
+                    underline="none"
+                    target="_blank"
                 >
                     <img src={logo} alt="logo" width="35px" />
                     <Typography fontSize="20px" color="white">
@@ -99,10 +113,10 @@ const NavGroup = ({ item }) => {
                     color="white"
                     fontSize="20px"
                 >
-                    <img src={telegram} alt="telegram" width="25px" />
-                    <img src={discord} alt="discord" width="25px" />
+                    <img src={telegram} alt="telegram" width="25px" style={{ cursor: 'pointer' }} />
+                    <img src={discord} alt="discord" width="25px" style={{ cursor: 'pointer' }} />
                 </Box>
-                <Typography fontSize="18px" color="rgba(255, 255, 255, 0.25)" fontWeight="800">
+                <Typography fontSize="18px" color="rgba(255, 255, 255, 0.25)" fontWeight="800" sx={{ cursor: 'pointer' }}>
                     CHIPZ
                 </Typography>
             </Box>

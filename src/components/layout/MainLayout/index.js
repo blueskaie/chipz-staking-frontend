@@ -13,6 +13,7 @@ import Sidebar from './Sidebar';
 import navigation from 'menu-items';
 import { drawerWidth } from 'store/constant';
 import { SET_MENU } from 'store/actions';
+import useMetaMask from 'hooks/metamask';
 
 // assets
 import { IconChevronRight } from '@tabler/icons';
@@ -68,6 +69,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
 const MainLayout = () => {
     const theme = useTheme();
     const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
+    const isMobile = useMediaQuery('(max-width:600px)');
 
     // Handle left drawer
     const leftDrawerOpened = useSelector((state) => state.customization.opened);
@@ -76,8 +78,23 @@ const MainLayout = () => {
         dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
     };
     const [showMetamask, setShowMetamask] = useState(false);
+    const { connect, disconnect, isActive } = useMetaMask();
 
     const clickMetamask = () => {
+        document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+        setShowMetamask(!showMetamask);
+    };
+
+    const connectWallet = async () => {
+        // Check if MetaMask is installed on user's browser
+        await connect();
+        document.getElementsByTagName('body')[0].style.overflow = 'auto';
+        setShowMetamask(!showMetamask);
+    };
+
+    const disconnectWallet = async () => {
+        await disconnect();
+        document.getElementsByTagName('body')[0].style.overflow = 'auto';
         setShowMetamask(!showMetamask);
     };
 
@@ -87,7 +104,7 @@ const MainLayout = () => {
     }, [matchDownMd]);
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', overflow: showMetamask ? 'none' : 'hidden' }}>
             <CssBaseline />
             {/* header */}
             <AppBar
@@ -96,6 +113,7 @@ const MainLayout = () => {
                 color="inherit"
                 elevation={0}
                 sx={{
+                    zIndex: '1',
                     bgcolor: theme.palette.background.default,
                     borderBottom: '0.5px solid rgba(255, 255, 255, 0.25)',
                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
@@ -115,15 +133,26 @@ const MainLayout = () => {
                 <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
                 {showMetamask && (
                     <Box
-                        position="absolute"
+                        position="fixed"
                         zIndex="10"
                         width="100%"
-                        height="calc(100vh + 250px)"
+                        height="100%"
                         left="0px"
                         top="0px"
                         bgcolor="rgba(17, 21, 34, 0.49)"
                         style={{ backdropFilter: 'blur(28px)' }}
                     >
+                        <Box
+                            position="absolute"
+                            left="0px"
+                            top="0px"
+                            width="100%"
+                            height="100%"
+                            onClick={() => {
+                                setShowMetamask(false);
+                                document.getElementsByTagName('body')[0].style.overflow = 'auto';
+                            }}
+                        />
                         <Box
                             display="flex"
                             position="relative"
@@ -134,9 +163,12 @@ const MainLayout = () => {
                             alignItems="center"
                             boxShadow="0px 2px 5px rgba(0, 0, 0, 0.1)"
                             bgcolor="#111522"
-                            width="500px"
-                            top="calc(100vh - 1000px / 2)"
-                            left="calc((100vw - 500px) / 2)"
+                            width={isMobile ? '90%' : '500px'}
+                            minWidth="275px"
+                            top="50%"
+                            left="50%"
+                            zIndex="11"
+                            style={{ transform: 'translate(-50%, -50%)' }}
                         >
                             <Box
                                 display="flex"
@@ -154,30 +186,57 @@ const MainLayout = () => {
                                 <Typography fontSize="16px" fontWeight="400">
                                     Connect to a Wallet
                                 </Typography>
-                                <Button onClick={() => setShowMetamask(false)}>
+
+                                <Button
+                                    onClick={() => {
+                                        setShowMetamask(false);
+                                        document.getElementsByTagName('body')[0].style.overflow = 'auto';
+                                    }}
+                                >
                                     <Typography fontSize="16px" fontWeight="400" color="white">
                                         X
                                     </Typography>
                                 </Button>
                             </Box>
-                            <Button
-                                sx={{
-                                    color: 'white',
-                                    padding: '10px 40px',
-                                    backgroundColor: '#CE2179',
-                                    '&:hover': { backgroundColor: '#BE1169' },
-                                    boxShadow: '0px 8px 0px #8F1754',
-                                    borderRadius: '7px',
-                                    width: '250px',
-                                    marginY: '30px'
-                                }}
-                                onClick={clickMetamask}
-                            >
-                                <Typography fontSize="18px" fontWeight="600" mr="20px">
-                                    Metamask
-                                </Typography>
-                                <img src={metamask} alt="metamask" style={{ width: '32px' }} />
-                            </Button>
+                            {!isActive ? (
+                                <Button
+                                    sx={{
+                                        color: 'white',
+                                        padding: '10px 40px',
+                                        backgroundColor: '#CE2179',
+                                        '&:hover': { backgroundColor: '#BE1169' },
+                                        boxShadow: '0px 8px 0px #8F1754',
+                                        borderRadius: '7px',
+                                        width: '250px',
+                                        marginY: '30px'
+                                    }}
+                                    onClick={connectWallet}
+                                >
+                                    <Typography fontSize="18px" fontWeight="600" mr="20px">
+                                        Metamask
+                                    </Typography>
+                                    <img src={metamask} alt="metamask" style={{ width: '32px' }} />
+                                </Button>
+                            ) : (
+                                <Button
+                                    sx={{
+                                        color: 'white',
+                                        padding: '10px 40px',
+                                        backgroundColor: '#CE2179',
+                                        '&:hover': { backgroundColor: '#BE1169' },
+                                        boxShadow: '0px 8px 0px #8F1754',
+                                        borderRadius: '7px',
+                                        width: '250px',
+                                        marginY: '30px'
+                                    }}
+                                    onClick={disconnectWallet}
+                                >
+                                    <Typography fontSize="18px" fontWeight="600" mr="20px">
+                                        Disconnect
+                                    </Typography>
+                                    <img src={metamask} alt="metamask" style={{ width: '32px' }} />
+                                </Button>
+                            )}
                         </Box>
                     </Box>
                 )}
