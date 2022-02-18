@@ -2,7 +2,19 @@
 
 // material-ui
 import { Grid, Typography, Button, Box } from '@mui/material';
-import { LinkPreview } from '@dhaiwat10/react-link-preview';
+// import { LinkPreview } from '@dhaiwat10/react-link-preview';
+import {
+    TwitterTimelineEmbed
+    // TwitterShareButton,
+    // TwitterFollowButton,
+    // TwitterHashtagButton,
+    // TwitterMentionButton,
+    // TwitterTweetEmbed,
+    // TwitterMomentShare,
+    // TwitterDMButton,
+    // TwitterVideoEmbed,
+    // TwitterOnAirButton
+} from 'react-twitter-embed';
 
 import { gridSpacing } from 'store/constant';
 
@@ -95,10 +107,17 @@ const Dashboard = () => (
                         <Typography sx={{ color: '#CE2179', fontSize: '23px', fontWeight: 600 }}>Announcement</Typography>
                         <Grid item>
                             <Grid item display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" marginTop={1}>
-                                <LinkPreview
+                                {/* <LinkPreview
                                     url="https://marker.medium.com/the-next-big-creator-opportunity-omnichannel-experiences-41d82bd703ea"
                                     width="100%"
                                     minWidth="400px"
+                                /> */}
+                                <TwitterTimelineEmbed
+                                    options={{
+                                        height: 400
+                                    }}
+                                    sourceType="url"
+                                    url="https://twitter.com/MyChipzio"
                                 />
                             </Grid>
                         </Grid>

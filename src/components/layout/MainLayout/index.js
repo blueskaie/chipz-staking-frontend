@@ -68,7 +68,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
 
 const MainLayout = () => {
     const theme = useTheme();
-    const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
+    const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
     const isMobile = useMediaQuery('(max-width:600px)');
 
     // Handle left drawer
