@@ -2,7 +2,7 @@
 
 // material-ui
 import { Grid, Typography, Button, Box } from '@mui/material';
-import { LinkPreview } from '@dhaiwat10/react-link-preview';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 import { gridSpacing } from 'store/constant';
 
@@ -93,15 +93,14 @@ const Dashboard = () => (
                 <Grid item flex={1} lg={5} md={5} sm={12} xs={12}>
                     <Grid item borderRadius="16px" bgcolor="#1A2033" boxShadow="0px 40px 60px -50px #000000" padding="30px" height="100%">
                         <Typography sx={{ color: '#CE2179', fontSize: '23px', fontWeight: 600 }}>Announcement</Typography>
-                        <Grid item>
-                            <Grid item display="flex" flexDirection="row" alignItems="center" justifyContent="space-between" marginTop={1}>
-                                <LinkPreview
-                                    url="https://marker.medium.com/the-next-big-creator-opportunity-omnichannel-experiences-41d82bd703ea"
-                                    width="100%"
-                                    minWidth="400px"
-                                />
-                            </Grid>
-                        </Grid>
+                        <TwitterTimelineEmbed
+                            options={{
+                                width: '100%',
+                                height: 400
+                            }}
+                            sourceType="url"
+                            url="https://twitter.com/MyChipzio"
+                        />
                     </Grid>
                 </Grid>
                 <Grid item flex={1} lg={5} md={5} sm={12}>

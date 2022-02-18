@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Box, ButtonBase, Button } from '@mui/material';
+import { Avatar, Box, ButtonBase, Button, useMediaQuery } from '@mui/material';
 
 // project imports
 import LogoSection from '../LogoSection';
@@ -16,6 +16,7 @@ import { IconMenu2 } from '@tabler/icons';
 
 const Header = ({ handleLeftDrawerToggle, clickMetamask }) => {
     const theme = useTheme();
+    const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
     const { isActive, account, wrongNetwork, switchNetwork } = useMetaMask();
 
     const connectBtn = !wrongNetwork ? (
@@ -67,26 +68,28 @@ const Header = ({ handleLeftDrawerToggle, clickMetamask }) => {
                 <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
                     <LogoSection />
                 </Box>
-                <ButtonBase sx={{ borderRadius: '12px', overflow: 'hidden' }}>
-                    <Avatar
-                        variant="rounded"
-                        sx={{
-                            ...theme.typography.commonAvatar,
-                            ...theme.typography.mediumAvatar,
-                            transition: 'all .2s ease-in-out',
-                            background: theme.palette.secondary.light,
-                            color: theme.palette.secondary.dark,
-                            '&:hover': {
-                                background: theme.palette.secondary.dark,
-                                color: theme.palette.secondary.light
-                            }
-                        }}
-                        onClick={handleLeftDrawerToggle}
-                        color="inherit"
-                    >
-                        <IconMenu2 stroke={1.5} size="1.3rem" />
-                    </Avatar>
-                </ButtonBase>
+                {matchDownMd && (
+                    <ButtonBase sx={{ borderRadius: '12px', overflow: 'hidden' }}>
+                        <Avatar
+                            variant="rounded"
+                            sx={{
+                                ...theme.typography.commonAvatar,
+                                ...theme.typography.mediumAvatar,
+                                transition: 'all .2s ease-in-out',
+                                background: theme.palette.secondary.light,
+                                color: theme.palette.secondary.dark,
+                                '&:hover': {
+                                    background: theme.palette.secondary.dark,
+                                    color: theme.palette.secondary.light
+                                }
+                            }}
+                            onClick={handleLeftDrawerToggle}
+                            color="inherit"
+                        >
+                            <IconMenu2 stroke={1.5} size="1.3rem" />
+                        </Avatar>
+                    </ButtonBase>
+                )}
             </Box>
 
             <Box sx={{ flexGrow: 1 }} />
