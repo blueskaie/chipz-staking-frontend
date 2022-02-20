@@ -1,13 +1,16 @@
 // material-ui
+import Web3 from 'web3';
+
 import { Typography, Box, Switch, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import farming from '../../assets/images/farm-ethereum.png';
 import logoback from '../../assets/images/logo_back.png';
 import link from '../../assets/images/link.png';
+import { MASTERCHEF_ABI, MASTERCHEF_ADDRESS } from '../../contract/config';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 const IOSSwitch = styled(Switch)(() => ({
@@ -119,6 +122,26 @@ const ActiveSwitch = styled(Switch)(() => ({
 
 const Farms = () => {
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        async function load() {
+            const web3 = new Web3(Web3.givenProvider || 'http://localhost:7545');
+
+            const accounts = await web3.eth.getAccounts();
+            const account = accounts[0];
+
+            const FarmContract = new web3.eth.Contract(MASTERCHEF_ABI, MASTERCHEF_ADDRESS);
+            const poolLength = await FarmContract.methods.poolLength().call();
+            console.log(poolLength);
+            const poolInfo = await FarmContract.methods.poolInfo(1).call();
+            console.log(poolInfo);
+
+            const userInfo = await FarmContract.methods.userInfo(1, account).call();
+            console.log(userInfo);
+        }
+
+        load();
+    }, []);
 
     return (
         <Box>
