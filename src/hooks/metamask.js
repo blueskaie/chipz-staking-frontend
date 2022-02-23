@@ -96,7 +96,6 @@ export const MetaMaskProvider = ({ children }) => {
         }
     };
 
-    console.log(localStorage.getItem('isConnected'));
     // Init Loading
     useEffect(() => {
         if (localStorage == null || localStorage.getItem('isConnected') !== 'true') {
