@@ -151,11 +151,34 @@ const isStack = async () => {
     return isStacked;
 };
 
+const isEarned = async () => {
+    const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
+    const accounts = await web3.eth.getAccounts();
+    const account = accounts[0];
+    const masterchefContract = new web3.eth.Contract(MASTERCHEF_ABI, MASTERCHEF_ADDRESS);
+
+    const earned = await masterchefContract.methods.pendingChipz(0, account).call();
+
+    return earned;
+};
+
+const isDepositFee = async () => {
+    const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
+    const accounts = await web3.eth.getAccounts();
+    const account = accounts[0];
+    const masterchefContract = new web3.eth.Contract(MASTERCHEF_ABI, MASTERCHEF_ADDRESS);
+
+    const result = await masterchefContract.methods.poolInfo(0).call();
+
+    return result.depositFeeBP;
+    // return depositFee[4];
+};
+
 const Farms = () => {
     const [open, setOpen] = useState(false);
     const [approve, setApprove] = useState(false);
     const [stacked, setStaked] = useState(false);
-    // const [connected, setConnect] = useState(false);
+    const [depositFee, setDepositFee] = useState(0);
     const isMobile = useMediaQuery('(max-width:600px)');
 
     const [showMetamask, setShowMetamask] = useState(false);
@@ -252,7 +275,7 @@ const Farms = () => {
         const masterchefContract = new web3.eth.Contract(MASTERCHEF_ABI, MASTERCHEF_ADDRESS);
         setLoading(true);
         try {
-            await masterchefContract.methods.withdrawToken(CHIPZ_ADDRESS).send({ from: account });
+            await masterchefContract.methods.deposit(0, 0).send({ from: account });
         } catch (e) {
             setLoading(false);
         }
@@ -266,7 +289,9 @@ const Farms = () => {
     useEffect(async () => {
         const isEnabled = await isEnable();
         setApprove(isEnabled);
-    }, [isEnable()]);
+        const depositFee = await isDepositFee();
+        setDepositFee(depositFee);
+    }, [isEnable]);
 
     useEffect(async () => {
         const isStacked = await isStack();
@@ -277,8 +302,17 @@ const Farms = () => {
         const masterchefContract = new web3.eth.Contract(MASTERCHEF_ABI, MASTERCHEF_ADDRESS);
         const amount = await masterchefContract.methods.userInfo(0, account).call();
         setStakedBalance(formatNumber(getBalanceNumber(amount[0]), 2));
-        setEarnedBalance(formatNumber(getBalanceNumber(amount[1]), 2));
-    }, [isStack()]);
+    }, [isStack]);
+
+    useEffect(() => {
+        const id = setInterval(async () => {
+            const earned = await isEarned();
+            setEarnedBalance(formatNumber(getBalanceNumber(earned), 2));
+        }, 10000);
+        return () => {
+            clearInterval(id);
+        };
+    }, []);
 
     // useEffect(async () => {
     //     const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
@@ -442,13 +476,13 @@ const Farms = () => {
                                 <Typography fontSize="16px">APR:</Typography>
                                 <Typography fontSize="16px">Earn:</Typography>
                                 <Typography fontSize="16px">Deposit Fee:</Typography>
-                                <Typography fontSize="16px">CHIPZ Staked</Typography>
-                                <Typography fontSize="16px">CHIPZ Earned</Typography>
+                                <Typography fontSize="16px">CHIPZ-BNB Staked:</Typography>
+                                <Typography fontSize="16px">CHIPZ Earned:</Typography>
                             </Box>
                             <Box display="flex" flexDirection="column" alignItems="flex-start" color="white" gap="15px">
                                 <Typography fontSize="16px">117,637%</Typography>
                                 <Typography fontSize="16px">CHIPZ</Typography>
-                                <Typography fontSize="16px">0.5%</Typography>
+                                <Typography fontSize="16px">{depositFee / 100}%</Typography>
                                 <Typography fontSize="16px">{stakedBalance ? stakedBalance : '_'}</Typography>
                                 <Typography fontSize="16px">{earnedBalance ? earnedBalance : '_'}</Typography>
                             </Box>
