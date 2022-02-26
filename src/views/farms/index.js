@@ -130,10 +130,12 @@ const isEnable = async () => {
     const accounts = await web3.eth.getAccounts();
     const account = accounts[0];
     const lpContract = new web3.eth.Contract(CHIPZ_BNB_ABI, CHIPZ_BNB_ADDRESS);
+    const chipzContract = new web3.eth.Contract(CHIPZ_ABI, CHIPZ_ADDRESS);
 
     const allowance = await lpContract.methods.allowance(account, MASTERCHEF_ADDRESS).call();
+    const chipzAllowance = await chipzContract.methods.allowance(account, MASTERCHEF_ADDRESS).call();
 
-    const isApproved = account && allowance && allowance > 0;
+    const isApproved = account && allowance && allowance > 0 && chipzAllowance && chipzAllowance > 0;
 
     return isApproved;
 };
