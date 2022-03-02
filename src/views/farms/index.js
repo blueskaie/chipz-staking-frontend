@@ -13,9 +13,18 @@ import { formatNumber, getBalanceNumber } from 'utils/formatBalance';
 import farming from '../../assets/images/farm-ethereum.png';
 import logoback from '../../assets/images/logo_back.png';
 import link from '../../assets/images/link.png';
-import { MASTERCHEF_ABI, MASTERCHEF_ADDRESS, CHIPZ_BNB_ABI, CHIPZ_BNB_ADDRESS, CHIPZ_ADDRESS, CHIPZ_ABI } from '../../contract/config';
+import {
+    MASTERCHEF_ABI,
+    MASTERCHEF_ADDRESS,
+    CHIPZ_BNB_ABI,
+    CHIPZ_BNB_ADDRESS,
+    CHIPZ_ADDRESS,
+    CHIPZ_ABI,
+    ERC20ABI
+} from '../../contract/config';
 import metamask from '../../assets/images/metamask.png';
 import { MaxUint256 } from '@ethersproject/constants';
+import axios from 'axios';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 const IOSSwitch = styled(Switch)(() => ({
@@ -181,6 +190,8 @@ const Farms = () => {
     const [approve, setApprove] = useState(false);
     const [stacked, setStaked] = useState(false);
     const [depositFee, setDepositFee] = useState(0);
+    const [apr, setApr] = useState(0);
+    const [totalLiquidity, setTotalLiquidity] = useState(0);
     const isMobile = useMediaQuery('(max-width:600px)');
 
     const [showMetamask, setShowMetamask] = useState(false);
@@ -309,8 +320,31 @@ const Farms = () => {
     useEffect(() => {
         const id = setInterval(async () => {
             const earned = await isEarned();
+            const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
             setEarnedBalance(formatNumber(getBalanceNumber(earned), 2));
-        }, 10000);
+            const poolContract = new web3.eth.Contract(CHIPZ_BNB_ABI, CHIPZ_BNB_ADDRESS);
+            const result = await poolContract.methods.getReserves().call();
+            const supply = (await poolContract.methods.totalSupply().call()) / Math.pow(10, 18);
+            const totalStaked = await poolContract.methods.balanceOf(MASTERCHEF_ADDRESS).call();
+            console.log(supply);
+            const reserve0 = result[0] / Math.pow(10, 18),
+                reserve1 = result[1] / Math.pow(10, 18);
+            const tokenresult = await axios.get(`https://api.pancakeswap.info/api/v2/tokens/0x0fABCB70eeDA798F9241F4bb11cceEa7d93B157a`);
+            const chipz_price = tokenresult.data.data.price / 1;
+            const chipz_bnb = tokenresult.data.data.price_BNB / 1;
+            const bnb_price = chipz_price / chipz_bnb;
+            const lptoken_price = (2 * Math.sqrt(reserve0 * reserve1) * Math.sqrt(bnb_price * chipz_price)) / supply;
+            const totalRewardPricePerYear = chipz_price * Math.pow(10, 16) * 10512000;
+            const totalStakingTokenInPool = lptoken_price * totalStaked;
+            const apr = (totalRewardPricePerYear / totalStakingTokenInPool) * 100;
+            const chipzTokenContract = new web3.eth.Contract(ERC20ABI, CHIPZ_ADDRESS);
+            const chipzbalance = (await chipzTokenContract.methods.balanceOf(CHIPZ_BNB_ADDRESS).call()) / Math.pow(10, 18);
+            const wbnbContract = new web3.eth.Contract(ERC20ABI, '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd');
+            const bnbbalance = (await wbnbContract.methods.balanceOf(CHIPZ_BNB_ADDRESS).call()) / Math.pow(10, 18);
+            setTotalLiquidity(chipzbalance * chipz_price + bnb_price * bnbbalance);
+            setApr(apr);
+            //'https://api.pancakeswap.info/api/v2/tokens/0x0fABCB70eeDA798F9241F4bb11cceEa7d93B157a
+        }, 1000);
         return () => {
             clearInterval(id);
         };
@@ -482,7 +516,7 @@ const Farms = () => {
                                 <Typography fontSize="16px">CHIPZ Earned:</Typography>
                             </Box>
                             <Box display="flex" flexDirection="column" alignItems="flex-start" color="white" gap="15px">
-                                <Typography fontSize="16px">117,637%</Typography>
+                                <Typography fontSize="16px">{Math.round(apr * 1000) / 1000}%</Typography>
                                 <Typography fontSize="16px">CHIPZ</Typography>
                                 <Typography fontSize="16px">{depositFee / 100}%</Typography>
                                 <Typography fontSize="16px">{stakedBalance ? stakedBalance : '_'}</Typography>
@@ -552,7 +586,7 @@ const Farms = () => {
                                                     <img src={link} alt="link" width="10px" />
                                                 </Box>
                                                 <Typography marginTop="10px" color="white">
-                                                    $30
+                                                    ${Math.round(totalLiquidity)}
                                                 </Typography>
                                             </Box>
                                         </Box>
