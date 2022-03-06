@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 
 import useMetaMask from 'hooks/metamask';
 import { formatNumber, getBalanceNumber } from 'utils/formatBalance';
+import LoadingScreen from 'react-loading-screen';
 
 import farming from '../../assets/images/farm-ethereum.png';
 import logoback from '../../assets/images/logo_back.png';
@@ -200,6 +201,7 @@ const Farms = () => {
     const [balance, setBalance] = useState(0);
     const [amount, setAmount] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [loadingText, setLoadingText] = useState('');
 
     const [stakedBalance, setStakedBalance] = useState(0);
     const [earnedBalance, setEarnedBalance] = useState(0);
@@ -266,7 +268,9 @@ const Farms = () => {
         const account = accounts[0];
         const masterchefContract = new web3.eth.Contract(MASTERCHEF_ABI, MASTERCHEF_ADDRESS);
         setLoading(true);
+        setLoadingText('Staking...');
         await masterchefContract.methods.deposit(0, web3.utils.toWei(amount)).send({ from: account });
+        setLoadingText('');
         setLoading(false);
         setStakeModal(false);
     };
@@ -276,7 +280,9 @@ const Farms = () => {
         const account = accounts[0];
         const masterchefContract = new web3.eth.Contract(MASTERCHEF_ABI, MASTERCHEF_ADDRESS);
         setLoading(true);
+        setLoadingText('Unstaking...');
         await masterchefContract.methods.withdraw(0, web3.utils.toWei(amount)).send({ from: account });
+        setLoadingText('');
         setLoading(false);
         setUnstakeModal(false);
     };
@@ -460,6 +466,13 @@ const Farms = () => {
 
     return (
         <Box>
+            <LoadingScreen
+                loading={loading}
+                bgColor="#f1f1f111"
+                spinnerColor="#0b8588"
+                textColor="#ffffff"
+                text={loadingText}
+            ></LoadingScreen>
             <Box display="flex" flexDirection="column" alignItems="center">
                 <Box display="flex" flexDirection="column" alignItems="center">
                     <Typography variant="h2" color="white">
@@ -583,7 +596,12 @@ const Farms = () => {
                                                     <Typography color="white" marginRight="5px">
                                                         CHPZ-BNB LP
                                                     </Typography>
-                                                    <img src={link} alt="link" width="10px" />
+                                                    <a
+                                                        href="https://pancake.kiemtienonline360.com/#/add/BNB/0x1D1AE64bf8B1472A351fE6fCEf88e671940beed3"
+                                                        target="_blank"
+                                                    >
+                                                        <img src={link} alt="link" width="10px" />
+                                                    </a>
                                                 </Box>
                                                 <Typography marginTop="10px" color="white">
                                                     ${Math.round(totalLiquidity)}
@@ -591,7 +609,13 @@ const Farms = () => {
                                             </Box>
                                         </Box>
                                         <Box marginTop="15px" width="100%" textAlign="center">
-                                            <Typography color="#CE2179">View on BscScan</Typography>
+                                            <a
+                                                href={'https://bscscan.com/token/' + CHIPZ_BNB_ADDRESS}
+                                                target="_blank"
+                                                style={{ color: '#CE2179' }}
+                                            >
+                                                View on BscScan
+                                            </a>
                                         </Box>
                                     </Box>
                                 </Box>

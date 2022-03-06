@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Typography, Box, Link } from '@mui/material';
@@ -17,6 +18,7 @@ import discord from '../../../../../../assets/images/discord.png';
 
 const NavGroup = ({ item }) => {
     const theme = useTheme();
+    const [chipzPrice, setChipzPrice] = useState(0);
 
     // menu list collapse & items
     const items = item.children?.map((menu) => {
@@ -33,6 +35,17 @@ const NavGroup = ({ item }) => {
                 );
         }
     });
+
+    useEffect(() => {
+        const id = setInterval(async () => {
+            const tokenresult = await axios.get(`https://api.pancakeswap.info/api/v2/tokens/0x0fABCB70eeDA798F9241F4bb11cceEa7d93B157a`);
+            const chipz_price = parseInt(tokenresult.data.data.price * 1000) / 1000;
+            setChipzPrice(chipz_price);
+        }, 1000);
+        return () => {
+            clearInterval(id);
+        };
+    }, []);
 
     return (
         <Box
@@ -98,7 +111,7 @@ const NavGroup = ({ item }) => {
                 >
                     <img src={logo} alt="logo" width="35px" />
                     <Typography fontSize="20px" color="white">
-                        $0.039
+                        ${chipzPrice}
                     </Typography>
                 </Box>
             </Box>
